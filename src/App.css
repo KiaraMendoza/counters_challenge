@@ -46,3 +46,9 @@
 .subtract-button:hover {
   background-color: tomato;
 }
+
+.total-count {
+  font-size: 24px;
+  margin-top: 2rem;
+  text-align: center;
+}

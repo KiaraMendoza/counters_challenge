@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import "./App.css";
 
-function Counter(props: { value: number }) {
-  let { value } = props;
+function Counter(props: {
+  value: number;
+  setTotalCount: Dispatch<SetStateAction<number>>;
+}) {
+  let { value, setTotalCount } = props;
   const [count, setCount] = useState(value);
 
   const incrementCounter = (newValue: number) => {
     setCount((prev) => (prev += newValue));
+    setTotalCount((prev) => (prev += newValue));
   };
 
   const decrementCounter = (newValue: number) => {
     setCount((prev) => (prev += newValue));
+    setTotalCount((prev) => (prev += newValue));
   };
 
   return (
@@ -38,12 +43,21 @@ function App() {
     { id: 4, value: 0 },
   ];
 
+  const [totalCount, setTotalCount] = useState(0);
+
   return (
     <div className="counter-challenge">
       <div className="counters">
         {data.map((counter) => (
-          <Counter key={counter.id} value={counter.value} />
+          <Counter
+            key={counter.id}
+            value={counter.value}
+            setTotalCount={setTotalCount}
+          />
         ))}
+      </div>
+      <div className="total-count">
+        <b>Total count: {totalCount}</b>
       </div>
     </div>
   );
