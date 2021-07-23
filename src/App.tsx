@@ -8,12 +8,7 @@ function Counter(props: {
   let { value, setTotalCount } = props;
   const [count, setCount] = useState(value);
 
-  const incrementCounter = (newValue: number) => {
-    setCount((prev) => (prev += newValue));
-    setTotalCount((prev) => (prev += newValue));
-  };
-
-  const decrementCounter = (newValue: number) => {
+  const updateCounter = (newValue: number) => {
     setCount((prev) => (prev += newValue));
     setTotalCount((prev) => (prev += newValue));
   };
@@ -21,13 +16,11 @@ function Counter(props: {
   return (
     <div className="counter">
       <div className="counter__buttons">
-        <button
-          className="subtract-button"
-          onClick={() => decrementCounter(-1)}>
+        <button className="subtract-button" onClick={() => updateCounter(-1)}>
           -
         </button>
         <b className="counter__count">{count}</b>
-        <button className="add-button" onClick={() => incrementCounter(1)}>
+        <button className="add-button" onClick={() => updateCounter(1)}>
           +
         </button>
       </div>
