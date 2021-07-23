@@ -1,0 +1,48 @@
+.counter-challenge {
+  display: flex;
+  flex-direction: column;
+}
+
+.counters {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid;
+  padding-bottom: 1rem;
+}
+
+.counter {
+  display: flex;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.counter__buttons {
+  padding: 0 5px;
+}
+
+.counter__count {
+  font-size: 18px;
+  margin: 0px 0.8rem;
+}
+
+.counter__buttons button {
+  padding: 0.4rem 0.5rem;
+  border: none;
+  font-size: 16px;
+}
+
+.add-button {
+  background-color: aliceblue;
+}
+
+.add-button:hover {
+  background-color: aquamarine;
+}
+
+.subtract-button {
+  background-color: seashell;
+}
+
+.subtract-button:hover {
+  background-color: tomato;
+}

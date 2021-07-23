@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 
 function Counter(props: { value: number }) {
   let { value } = props;
@@ -13,11 +14,17 @@ function Counter(props: { value: number }) {
   };
 
   return (
-    <div>
-      <b>{count}</b>
-      <div>
-        <button onClick={() => decrementCounter(-1)}>-</button>
-        <button onClick={() => incrementCounter(1)}>+</button>
+    <div className="counter">
+      <div className="counter__buttons">
+        <button
+          className="subtract-button"
+          onClick={() => decrementCounter(-1)}>
+          -
+        </button>
+        <b className="counter__count">{count}</b>
+        <button className="add-button" onClick={() => incrementCounter(1)}>
+          +
+        </button>
       </div>
     </div>
   );
@@ -32,10 +39,12 @@ function App() {
   ];
 
   return (
-    <div>
-      {data.map((counter) => (
-        <Counter key={counter.id} value={counter.value} />
-      ))}
+    <div className="counter-challenge">
+      <div className="counters">
+        {data.map((counter) => (
+          <Counter key={counter.id} value={counter.value} />
+        ))}
+      </div>
     </div>
   );
 }
