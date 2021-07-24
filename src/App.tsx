@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./App.css";
 
-function Counter(props: {
+export function Counter(props: {
   value: number;
   counters: { id: number; value: number }[];
   setTotalCount: Dispatch<SetStateAction<number>>;
@@ -11,7 +11,7 @@ function Counter(props: {
 
   const updateCounter = (newValue: number) => {
     setCount((prev) => (prev += newValue));
-    setTotalCount((prev) => (prev += newValue));
+    setTotalCount((prev: any) => (prev += newValue));
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Counter(props: {
   );
 }
 
-function InitialValueUpdater({
+export function InitialValueUpdater({
   newValueInput,
   setNewValueInput,
   setNewInitialValue,
