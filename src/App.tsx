@@ -1,17 +1,22 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./App.css";
 
 function Counter(props: {
   value: number;
+  counters: { id: number; value: number }[];
   setTotalCount: Dispatch<SetStateAction<number>>;
 }) {
-  let { value, setTotalCount } = props;
-  const [count, setCount] = useState(value);
+  const { value, setTotalCount, counters } = props;
+  const [count, setCount] = useState<number>(value);
 
   const updateCounter = (newValue: number) => {
     setCount((prev) => (prev += newValue));
     setTotalCount((prev) => (prev += newValue));
   };
+
+  useEffect(() => {
+    setCount(value);
+  }, [value, counters]);
 
   return (
     <div className="counter">
@@ -35,22 +40,50 @@ function App() {
     { id: 3, value: 0 },
     { id: 4, value: 0 },
   ];
+  const [counters, setCounters] =
+    useState<{ id: number; value: number }[]>(data);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [newValueInput, setNewValueInput] = useState<number>(0);
 
-  const [totalCount, setTotalCount] = useState(0);
+  const setNewInitialValue = () => {
+    setCounters((prev) =>
+      prev.map((_counter) => ({ ..._counter, value: newValueInput })),
+    );
+  };
+
+  useEffect(() => {
+    setTotalCount(
+      counters
+        .map(({ value }) => value)
+        .reduce((_valueCurr, _valueAcc) => _valueCurr + _valueAcc),
+    );
+  }, [counters]);
 
   return (
     <div className="counter-challenge">
       <div className="counters">
-        {data.map((counter) => (
+        {counters.map((counter) => (
           <Counter
             key={counter.id}
             value={counter.value}
+            counters={counters}
             setTotalCount={setTotalCount}
           />
         ))}
       </div>
       <div className="total-count">
         <b>Total count: {totalCount}</b>
+      </div>
+      <div>
+        <p>Change counter's initial value:</p>
+        <input
+          onChange={(e) => {
+            setNewValueInput(parseFloat(e.target.value));
+          }}
+          value={newValueInput}
+          type="number"
+        />
+        <button onClick={setNewInitialValue}>Apply</button>
       </div>
     </div>
   );
