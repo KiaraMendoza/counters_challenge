@@ -33,6 +33,30 @@ function Counter(props: {
   );
 }
 
+function InitialValueUpdater({
+  newValueInput,
+  setNewValueInput,
+  setNewInitialValue,
+}: {
+  newValueInput: number;
+  setNewValueInput: Dispatch<SetStateAction<number>>;
+  setNewInitialValue: () => void;
+}) {
+  return (
+    <div>
+      <p>Change counter's initial value:</p>
+      <input
+        onChange={(e) => {
+          setNewValueInput(parseFloat(e.target.value));
+        }}
+        value={newValueInput}
+        type="number"
+      />
+      <button onClick={setNewInitialValue}>Apply</button>
+    </div>
+  );
+}
+
 function App() {
   const data = [
     { id: 1, value: 0 },
@@ -74,17 +98,11 @@ function App() {
       <div className="total-count">
         <b>Total count: {totalCount}</b>
       </div>
-      <div>
-        <p>Change counter's initial value:</p>
-        <input
-          onChange={(e) => {
-            setNewValueInput(parseFloat(e.target.value));
-          }}
-          value={newValueInput}
-          type="number"
-        />
-        <button onClick={setNewInitialValue}>Apply</button>
-      </div>
+      <InitialValueUpdater
+        newValueInput={newValueInput}
+        setNewValueInput={setNewValueInput}
+        setNewInitialValue={setNewInitialValue}
+      />
     </div>
   );
 }
